@@ -68,4 +68,17 @@ public class Utils
 
         return response;
     }
+    
+
+    public static String promptForPesel(String message)
+    {
+        while(true)
+        {
+            System.out.print(message);
+            String response = scanner.nextLine();
+            if(response.trim().length() ==11)
+                return response;
+            System.out.println("Pesel musi mieć określoną długość");
+        }
+    }
 }

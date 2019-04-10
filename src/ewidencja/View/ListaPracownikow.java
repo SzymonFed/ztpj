@@ -5,7 +5,9 @@
  */
 package ewidencja.View;
 
-import ewidencja.Model.Dyrektor;
+
+import ewidencja.Model.DataBase;
+import ewidencja.Model.Pracownik;
 import java.util.Scanner;
 
 /**
@@ -13,18 +15,58 @@ import java.util.Scanner;
  * @author Szymon
  */
 public class ListaPracownikow {
-
+    static Scanner scan = new Scanner(System.in);
     public static void printDetails()
     {
         
-        String answer = "";
-        //Dyrektor dyrektor = new Dyrektor("ds","dupa","penis","costam",2.0,"1",4.0,"4",2.9);
-        System.out.println("1. Lista pracowników");
-        //System.out.println(dyrektor.toString());
-        System.out.println("[Enter] - następny");
-        System.out.println("[Q] - powrót");
-        Scanner scan = new Scanner(System.in);
-        answer = scan.nextLine();
-        if (answer.equals("q")) MainMenu.chooseOperation();
+        int i = 0;
+        if (DataBase.pracownicy.isEmpty()){
+            System.out.println("---------------------------");
+            System.out.println("1. Lista pracowników");
+            System.out.println("Brak pracowników. Naciśnij Enter by wyjść.");
+            promptEnterKey();
+        }
+        else
+        for_loop:
+        for(Pracownik value : DataBase.pracownicy.values())
+        {
+            String answer = "";
+            System.out.println("---------------------------");
+            System.out.println("1. Lista pracowników");
+            i++;
+            System.out.println(value.toString());
+            System.out.println("---------------------------");
+            System.out.println("            Pozycja: "+i+"/"+DataBase.pracownicy.size());
+            if(!promptForView())
+            {
+                break for_loop;
+            }
+        }
+        
+        
+    }
+    static boolean promptForView()
+    {
+        while(true)
+        {
+            System.out.println("[N] - następny");
+            System.out.println("[Q] - powrót");
+            String answer = scan.nextLine();
+            switch(answer)
+            {
+                case "N":
+                case "n":
+                    return true;
+                case "Q":
+                case "q":
+                    return false;
+            }   
+        }
+    }
+    public static void promptEnterKey()
+    {
+       
+       Scanner scanner = new Scanner(System.in);
+       scanner.nextLine();
     }
 }

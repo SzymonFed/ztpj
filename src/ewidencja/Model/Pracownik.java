@@ -33,9 +33,9 @@ public class Pracownik
     @Override
     public String toString()
     {
-        return String.format(""
+        return String.format("------------------------------------%n"
                 +"Identyfikator PESEL         :  %s%n"
-                +"imie                        :  %s%n"
+                +"Imię                        :  %s%n"
                 +"Nazwisko                    :  %s%n"
                 +"Stanowisko                  :  %s%n"
                 +"Wynagrodzenie (zł)          :  %s%n"
@@ -51,6 +51,25 @@ public class Pracownik
         );
     }
     
+    public String toString2()
+    {
+        return String.format("------------------------------------"
+
+                +"Imię                        :  %s%n"
+                +"Nazwisko                    :  %s%n"
+                +"Stanowisko                  :  %s%n"
+                +"Wynagrodzenie (zł)          :  %s%n"
+                +"Telefon służbowy            :  %s%n"
+                
+                
+                , pesel
+                , imie
+                , nazwisko
+                , stanowisko
+                , wynagrodzenie
+                , (telefon != null ? telefon : "-brak-")
+        );
+    }
     
     /*setery i getery*/
     public void setPesel(String pesel)

@@ -16,11 +16,11 @@ import java.util.Map;
  */
 public class DodajPracownika 
 {
-    Scanner scan = new Scanner(System.in);
+    static Scanner scan = new Scanner(System.in);
     
     public static Pracownik dodajPracownika()
     {
-          String pesel = promptForString("PESEL: ");
+          String pesel = promptForPesel("PESEL: ");
           String imie = promptForString("Imię: ");
           String nazwisko = promptForString("Nazwisko: ");
           String stanowisko = promptForString("Stanowisko: ");
@@ -62,12 +62,63 @@ public class DodajPracownika
                 ,prowizja
                 ,limitProwizji);
     }
-    public static void addToMap(Map<String,java.lang.Object> pracownicy,Handlowiec handlowiec)
+    public static void addToMap(Map<String,Pracownik> pracownicy,Pracownik pracownik)
     {
-         pracownicy.put(handlowiec.getPesel(),handlowiec);
+         pracownicy.put(pracownik.getPesel(),pracownik);
     }
-    public static void addToMap(Map<String,java.lang.Object> pracownicy,Dyrektor dyrektor)
+    public static void printDetails()
     {
-         pracownicy.put(dyrektor.getPesel(),dyrektor);
+
+        System.out.println("---------------------------");
+        System.out.print("[D]yrektor/[H]andlowiec:    ");
+
+        String answer = scan.nextLine();
+        System.out.println("---------------------------");
+        Pracownik pracownik = null;
+        switch(answer)
+        {
+            case "D":
+            case "d":
+                pracownik = ewidencja.Controller.DodajPracownika.dodajDyrektora();
+                break;
+            case "H":
+            case "h":
+                pracownik = ewidencja.Controller.DodajPracownika.dodajHandlowca();
+                break;
+            default: 
+                System.out.println("Niepoprawna opcja.");
+                break;
+        }
+        if (pracownik!=null){
+        System.out.println("[Z] - zapisz");
+        System.out.println("[Q] - powrót");
+        if (promptForSave())
+        {
+            DodajPracownika.addToMap(DataBase.pracownicy,pracownik);
+        }
+        }
+           
     }
+    static boolean promptForSave()
+    {
+        while(true)
+        {
+            String answer = scan.nextLine();
+            if (answer.length()>0)
+                {
+                    switch(answer.charAt(0)){
+                        case 'Z':
+                        case'z':
+                            return true;
+                        case 'Q':
+                        case 'q':
+                            return false;
+                    }
+                }
+        System.out.println("Niepoprawna opcja.");
+        System.out.println("[Z] - zapisz");
+        System.out.println("[Q] - powrót");
+        }
+    }
+     
 }

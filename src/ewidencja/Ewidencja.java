@@ -5,21 +5,17 @@
  */
 
 
-import ewidencja.Model.Handlowiec;
-import ewidencja.Model.Pracownik;
-import ewidencja.View.MainMenu;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import static ewidencja.View.MainMenu.chooseOperation;
+
 
 
 
 public class Ewidencja {
     
+
     public static void main(String[] args) 
-    {
-        
-        MainMenu menu = new MainMenu();
-        menu.chooseOperation(); 
+    {       
+        chooseOperation();
     }
 }
