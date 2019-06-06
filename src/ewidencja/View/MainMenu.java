@@ -53,7 +53,7 @@ public class MainMenu {
                     ewidencja.Controller.UsunPracownika.deleteWorker();
                     break;
                 case 4:
-                    System.out.println("Not yet implemented!");
+                    ewidencja.View.BackupView.View();
                     break;
                 case 0:
                     break while_loop;

@@ -5,11 +5,13 @@
  */
 package ewidencja.Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Szymon
  */
-public class Pracownik 
+public class Pracownik implements Serializable
 {
     protected String pesel;
     protected String imie;

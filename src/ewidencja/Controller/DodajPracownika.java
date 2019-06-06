@@ -90,13 +90,18 @@ public class DodajPracownika
                 break;
         }
         if (pracownik!=null){
-        System.out.println("[Z] - zapisz");
-        System.out.println("[Q] - powrót");
-        if (promptForSave())
-        {
-            DodajPracownika.addToMap(DataBase.pracownicy,pracownik);
+            if (!DataBase.pracownicy.containsKey(pracownik.getPesel())){
+                System.out.println("[Z] - zapisz");
+                System.out.println("[Q] - powrót");
+                if (promptForSave())
+                {
+
+                    DodajPracownika.addToMap(DataBase.pracownicy,pracownik);
+                }
+            }
+            else System.out.println("Pracownik z tym PESELem już istnieje.");
         }
-        }
+        
            
     }
     static boolean promptForSave()
