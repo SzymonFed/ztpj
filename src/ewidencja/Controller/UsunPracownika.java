@@ -5,10 +5,12 @@
  */
 package ewidencja.Controller;
 
+import ewidencja.DAO.DAOWrapper;
 import ewidencja.Model.DataBase;
 import ewidencja.Model.Pracownik;
 
 import static ewidencja.Utils.promptForPesel;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -20,27 +22,15 @@ public class UsunPracownika {
     public static void deleteWorker()
     {
         
-        System.out.print("----------------------------");
+        System.out.println("----------------------------");
         
         String answer = promptForPesel("Podaj identyfikator PESEL:  ");
-        if(DataBase.pracownicy.containsKey(answer))
-        {
-           Pracownik pracownik = DataBase.pracownicy.get(answer);
-           System.out.println(pracownik.toString2());
-           System.out.println("[Enter] - potwierdź");
-           System.out.println("[Q] - porzuć");
-            if (promptForDelete())
-            {
-                DataBase.pracownicy.remove(pracownik.getPesel());
-                System.out.println("Pomyślnie sunięto pracownika.");
-            }
-
+        try{
+            DAOWrapper.deletePracownik(answer);
         }
-        else {
-            System.out.println("Pracownik nie istnieje");
-            ewidencja.View.MainMenu.chooseOperation();
+        catch(SQLException e){
+            /*someday something will be there*/
         }
-        
 
     }
     static boolean promptForDelete()

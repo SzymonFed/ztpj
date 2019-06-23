@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package ewidencja.View;
+import ewidencja.DAO.DAOWrapper;
+import ewidencja.Model.Pracownik;
+import static ewidencja.WorkersList.workersGlobalList;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.rmi.NotBoundException;
+import java.sql.SQLException;
 import java.util.Scanner;
 /**
  *
@@ -19,11 +25,12 @@ public class MainMenu {
         System.out.println("    2. Dodaj pracownika");
         System.out.println("    3. Usuń pracownika");
         System.out.println("    4. Kopia zapasowa");
+        System.out.println("    5. Pobierz dane z sieci");
         System.out.println("    0. Wyjdź");
         System.out.print("Wybór: ");
     }
     
-    public static void chooseOperation()
+    public static void chooseOperation() throws SQLException, IOException, ClassNotFoundException, NotBoundException
     {
         while_loop:
         while(true)
@@ -38,7 +45,7 @@ public class MainMenu {
             }
             catch(NumberFormatException e)
             {
-                System.err.println("Wproadzono nieprawidłową opcję!");
+                System.err.println("Wprowadzono nieprawidłową opcję!");
                 answer = 0;
             }
             switch (answer)
@@ -54,6 +61,13 @@ public class MainMenu {
                     break;
                 case 4:
                     ewidencja.View.BackupView.View();
+                    break;
+                case 5 :
+                    ewidencja.View.NetworkView.View();
+                    break;
+                case 6:
+                    for(Pracownik pracownik : workersGlobalList){
+                        System.out.println(pracownik);}
                     break;
                 case 0:
                     break while_loop;

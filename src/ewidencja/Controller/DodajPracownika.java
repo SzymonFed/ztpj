@@ -5,9 +5,12 @@
  */
 package ewidencja.Controller;
 
+import ewidencja.DAO.DAOWrapper;
+import ewidencja.DAO.PracownikDAO;
 import ewidencja.Model.*;
 import java.util.Scanner;
 import static ewidencja.Utils.*;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -23,15 +26,16 @@ public class DodajPracownika
           String pesel = promptForPesel("PESEL: ");
           String imie = promptForString("Imię: ");
           String nazwisko = promptForString("Nazwisko: ");
-          String stanowisko = promptForString("Stanowisko: ");
+          //String stanowisko = promptForString("Stanowisko: ");
           double wynagrodzenie = promptForDouble("Wynagrodzenie: ");
           String telefon = promptForString("Telefon: ");
-          return new Pracownik (pesel,imie,nazwisko,stanowisko,wynagrodzenie,telefon);
+          return new Pracownik (pesel,imie,nazwisko,"",wynagrodzenie,telefon);
     }
     
     public static Dyrektor dodajDyrektora()
     {
         Pracownik pracownik = dodajPracownika();
+        String stanowisko = "Dyrektor";
         double dodatekSluzbowy = promptForDouble("Dodatek służbowy: ");
         String kartaSluzbowa = promptForString("Numer karty służbowej: ");
         double limitKosztow = promptForDouble("Limit kosztów: ");
@@ -39,7 +43,7 @@ public class DodajPracownika
                 pracownik.getPesel()
                 ,pracownik.getImie()
                 ,pracownik.getNazwisko()
-                ,pracownik.getStanowisko()
+                ,stanowisko
                 ,pracownik.getWynagrodzenie()
                 ,pracownik.getTelefon()
                 ,dodatekSluzbowy
@@ -51,22 +55,20 @@ public class DodajPracownika
         Pracownik pracownik = dodajPracownika();
         double prowizja = promptForDouble("Prowizja: ");
         double limitProwizji = promptForDouble("limitProwizji: ");
-        
+        String stanowisko = "Handlowiec";
         return new Handlowiec(
                 pracownik.getPesel()
                 ,pracownik.getImie()
                 ,pracownik.getNazwisko()
-                ,pracownik.getStanowisko()
+                ,stanowisko
                 ,pracownik.getWynagrodzenie()
                 ,pracownik.getTelefon()
                 ,prowizja
                 ,limitProwizji);
     }
-    public static void addToMap(Map<String,Pracownik> pracownicy,Pracownik pracownik)
-    {
-         pracownicy.put(pracownik.getPesel(),pracownik);
-    }
-    public static void printDetails()
+   
+    
+    public static void printDetails() throws SQLException
     {
 
         System.out.println("---------------------------");
@@ -74,35 +76,37 @@ public class DodajPracownika
 
         String answer = scan.nextLine();
         System.out.println("---------------------------");
-        Pracownik pracownik = null;
         switch(answer)
         {
             case "D":
             case "d":
-                pracownik = ewidencja.Controller.DodajPracownika.dodajDyrektora();
+                Dyrektor dyrektor = ewidencja.Controller.DodajPracownika.dodajDyrektora() ;
+                confirmSave(dyrektor);
                 break;
             case "H":
             case "h":
-                pracownik = ewidencja.Controller.DodajPracownika.dodajHandlowca();
+                Handlowiec handlowiec = ewidencja.Controller.DodajPracownika.dodajHandlowca() ;
+                confirmSave(handlowiec);
                 break;
+                        
             default: 
                 System.out.println("Niepoprawna opcja.");
-                break;
-        }
-        if (pracownik!=null){
-            if (!DataBase.pracownicy.containsKey(pracownik.getPesel())){
-                System.out.println("[Z] - zapisz");
-                System.out.println("[Q] - powrót");
-                if (promptForSave())
-                {
 
-                    DodajPracownika.addToMap(DataBase.pracownicy,pracownik);
-                }
-            }
-            else System.out.println("Pracownik z tym PESELem już istnieje.");
         }
-        
-           
+    }
+    public static void confirmSave(Object pracownik) throws SQLException
+    {
+        if (pracownik!=null)
+        {
+            System.out.println("[Z] - zapisz");
+            System.out.println("[Q] - powrót");
+            if (promptForSave())
+            {
+                if (pracownik instanceof Dyrektor) DAOWrapper.savePracownik((Dyrektor)pracownik);
+                else if(pracownik instanceof Handlowiec) DAOWrapper.savePracownik((Handlowiec)pracownik);
+                /*if (pracownik instanceof Pracownik) DAOWrapper.savePracownik((Pracownik)pracownik);*/
+            }
+        }    
     }
     static boolean promptForSave()
     {
@@ -120,9 +124,9 @@ public class DodajPracownika
                             return false;
                     }
                 }
-        System.out.println("Niepoprawna opcja.");
-        System.out.println("[Z] - zapisz");
-        System.out.println("[Q] - powrót");
+            System.out.println("Niepoprawna opcja.");
+            System.out.println("[Z] - zapisz");
+            System.out.println("[Q] - powrót");
         }
     }
      

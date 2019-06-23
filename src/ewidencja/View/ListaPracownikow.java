@@ -6,8 +6,11 @@
 package ewidencja.View;
 
 
+import ewidencja.DAO.DAOWrapper;
+import ewidencja.DAO.SQLPracownikParser;
 import ewidencja.Model.DataBase;
 import ewidencja.Model.Pracownik;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -16,27 +19,28 @@ import java.util.Scanner;
  */
 public class ListaPracownikow {
     static Scanner scan = new Scanner(System.in);
-    public static void printDetails()
+    public static void printDetails() throws SQLException
     {
-        
+        int workersCount = DAOWrapper.countPracownik();
         int i = 0;
-        if (DataBase.pracownicy.isEmpty()){
+        if (workersCount<=0){
             System.out.println("---------------------------");
             System.out.println("1. Lista pracowników");
             System.out.println("Brak pracowników. Naciśnij Enter by wyjść.");
             promptEnterKey();
         }
         else
+        
         for_loop:
-        for(Pracownik value : DataBase.pracownicy.values())
+        for(i = 1; i<=workersCount;i++)
         {
             String answer = "";
             System.out.println("---------------------------");
             System.out.println("1. Lista pracowników");
-            i++;
-            System.out.println(value.toString());
+            
+            System.out.println(DAOWrapper.loadPracownik(i));
             System.out.println("---------------------------");
-            System.out.println("            Pozycja: "+i+"/"+DataBase.pracownicy.size());
+            System.out.println("            Pozycja: "+i+"/"+workersCount);
             if(!promptForView())
             {
                 break for_loop;

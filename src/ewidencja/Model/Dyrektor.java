@@ -5,16 +5,23 @@
  */
 package ewidencja.Model;
 
+import javax.xml.bind.annotation.*;
+
 /**
  *
  * @author Szymon
  */
+@XmlRootElement(name="Pracownik")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Dyrektor extends Pracownik 
 {
+    @XmlElement
     private double dodatekSluzbowy;
+    @XmlElement
     private String kartaSluzbowa;
+    @XmlElement
     private double limitKosztow;
-    private Pracownik pracownik;
+
     
     public Dyrektor (String pesel,String imie, String nazwisko, String stanowisko,double wynagrodzenie, String telefon,  double dodatekSluzbowy, String kartaSluzbowa, double limitKosztow)
     {

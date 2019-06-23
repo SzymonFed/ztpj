@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="Pracownik" type="Pracownik"/>
+    <xs:element name="Dyrektor" type="Dyrektor"/>
+    <xs:element name="Handlowiec" type="Handlowiec"/>
+    <xs:complexType name="Pracownik">
+        <xs:sequence>
+            <xs:element type="xs:string" name="pesel"/>
+            <xs:element type="xs:string" name="imie"/>
+            <xs:element type="xs:string" name="nazwisko"/>
+            <xs:element type="xs:string" name="stanowisko"/>
+            <xs:element type="xs:double" name="wynagrodzenie"/>
+            <xs:element type="xs:string" name="telefon"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Dyrektor">
+        <xs:complexContent>
+            <xs:extension base="Pracownik">
+                <xs:sequence>
+                    <xs:element type="xs:double" name="dodatekSluzbowy"/>
+                    <xs:element type="xs:string" name="kartaSluzbowa"/> 
+                    <xs:element type="xs:double" name="limitKosztow"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Handlowiec">
+        <xs:complexContent>
+            <xs:extension base="Pracownik">
+                <xs:sequence>
+                    <xs:element type="xs:double" name="prowizja"/>
+                    <xs:element type="xs:double" name="limitProwizji"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+</xs:schema>
