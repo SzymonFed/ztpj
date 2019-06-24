@@ -5,7 +5,7 @@
  */
 package ewidencja.DAO;
 
-import ewidencja.Model.Dyrektor;
+
 import ewidencja.Model.Handlowiec;
 import java.sql.Connection;
 import java.sql.SQLException;

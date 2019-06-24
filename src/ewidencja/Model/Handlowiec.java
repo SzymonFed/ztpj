@@ -11,13 +11,11 @@ import javax.xml.bind.annotation.*;
  *
  * @author Szymon
  */
-@XmlRootElement(name="Pracownik")
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Handlowiec extends Pracownik
 {
-    @XmlElement
+
     private double prowizja;
-    @XmlElement
     private final double limitProwizji;
     
     public Handlowiec (String pesel,String imie, String nazwisko, String stanowisko,double wynagrodzenie, String telefon, double prowizja, double limitProwizji)

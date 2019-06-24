@@ -42,11 +42,6 @@ public class Ewidencja  {
         serverThread.start();        
         
         chooseOperation();
-        
 
-        
-        
-        
-       
     }
 }

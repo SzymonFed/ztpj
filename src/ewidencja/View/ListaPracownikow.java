@@ -23,6 +23,7 @@ public class ListaPracownikow {
     {
         int workersCount = DAOWrapper.countPracownik();
         int i = 0;
+        int j=1;
         if (workersCount<=0){
             System.out.println("---------------------------");
             System.out.println("1. Lista pracowników");
@@ -37,10 +38,11 @@ public class ListaPracownikow {
             String answer = "";
             System.out.println("---------------------------");
             System.out.println("1. Lista pracowników");
-            
-            System.out.println(DAOWrapper.loadPracownik(i));
+            while(DAOWrapper.loadPracownik(j)==null)j++;
+            System.out.println(DAOWrapper.loadPracownik(j));
             System.out.println("---------------------------");
             System.out.println("            Pozycja: "+i+"/"+workersCount);
+            j++;
             if(!promptForView())
             {
                 break for_loop;

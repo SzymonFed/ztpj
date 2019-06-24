@@ -87,7 +87,7 @@ public class DAOWrapper {
     {
         Pracownik pracownik;
         ResultSet rs = pracownikDAO.connect(pracownikDAO.SQLQueryLoadAll());
-        List<Pracownik> workersList = new ArrayList<Pracownik>();
+        List<Pracownik> workersList = new ArrayList<>();
         System.out.println();
         while (rs.next())
         {

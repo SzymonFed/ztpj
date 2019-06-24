@@ -11,15 +11,14 @@ import javax.xml.bind.annotation.*;
  *
  * @author Szymon
  */
-@XmlRootElement(name="Pracownik")
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Dyrektor extends Pracownik 
 {
-    @XmlElement
+  
     private double dodatekSluzbowy;
-    @XmlElement
+
     private String kartaSluzbowa;
-    @XmlElement
+
     private double limitKosztow;
 
     

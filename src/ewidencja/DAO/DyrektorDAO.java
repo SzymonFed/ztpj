@@ -6,7 +6,7 @@
 package ewidencja.DAO;
 
 import ewidencja.Model.Dyrektor;
-import ewidencja.Model.Pracownik;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;

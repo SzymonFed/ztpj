@@ -12,22 +12,14 @@ import javax.xml.bind.annotation.*;
  *
  * @author Szymon
  */
-@XmlRootElement(name="Pracownik")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({ewidencja.Model.Dyrektor.class,ewidencja.Model.Handlowiec.class})
+
 public class Pracownik implements Serializable
 {
-    @XmlElement
     protected String pesel;
-    @XmlElement
     protected String imie;
-    @XmlElement
     protected String nazwisko;
-    @XmlElement
     protected String stanowisko;
-    @XmlElement
     protected double wynagrodzenie;
-    @XmlElement
     protected String telefon;
     
     private int id;

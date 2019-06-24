@@ -5,9 +5,7 @@
  */
 package ewidencja.DAO;
 
-import ewidencja.Model.Dyrektor;
-import ewidencja.Model.Handlowiec;
-import ewidencja.Model.Pracownik;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

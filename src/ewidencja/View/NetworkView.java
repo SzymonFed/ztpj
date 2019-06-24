@@ -30,19 +30,17 @@ public class NetworkView {
         List<Pracownik> listaPracownikow = new ArrayList<Pracownik>();
         String adress = "localhost";
         String rmiAdress = "rmi://localhost/validator";
-        
+        int port = 1111;
         Scanner scan = new Scanner(System.in);
         
         System.out.println("5.1 Pobierz dane z sieci");
         System.out.println("------------------------------------------------------------------");
-        System.out.println("Adres : ");
+        System.out.println("Adres : "+ adress);
         //String adress = scan.nextLine();
-        System.out.println("Port : ");
+        System.out.println("Port : "+ port);
         //int port = Integer.parseInt(scan.nextLine());
-        int port = 1111;
         
-        
-        
+  
         ewidencja.networking.Client client = new ewidencja.networking.Client();
         
         listaPracownikow = client.runClient(adress,port);

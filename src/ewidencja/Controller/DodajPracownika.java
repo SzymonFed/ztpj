@@ -7,11 +7,12 @@ package ewidencja.Controller;
 
 import ewidencja.DAO.DAOWrapper;
 import ewidencja.DAO.PracownikDAO;
-import ewidencja.Model.*;
 import java.util.Scanner;
 import static ewidencja.Utils.*;
 import java.sql.SQLException;
-import java.util.Map;
+import ewidencja.Model.Pracownik;
+import ewidencja.Model.Handlowiec;
+import ewidencja.Model.Dyrektor;
 
 /**
  *
